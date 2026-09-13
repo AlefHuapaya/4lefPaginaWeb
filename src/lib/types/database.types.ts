@@ -252,6 +252,35 @@ export type Database = {
           },
         ]
       }
+      validadores_semana: {
+        Row: {
+          area: Database["public"]["Enums"]["validador_area"]
+          persona: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          area: Database["public"]["Enums"]["validador_area"]
+          persona?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          area?: Database["public"]["Enums"]["validador_area"]
+          persona?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "validadores_semana_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       weekly_highlight_images: {
         Row: {
           created_at: string
@@ -392,6 +421,7 @@ export type Database = {
       trabajo_tipo:
         | "Cableado nuevo sin afectación"
         | "Reubicaciones con afectación"
+      validador_area: "PEXT" | "TX" | "N3" | "CORE IP"
       zona_tipo_trabajo:
         | "FO PINT"
         | "FO PEXT"
@@ -536,6 +566,7 @@ export const Constants = {
         "Cableado nuevo sin afectación",
         "Reubicaciones con afectación",
       ],
+      validador_area: ["PEXT", "TX", "N3", "CORE IP"],
       zona_tipo_trabajo: [
         "FO PINT",
         "FO PEXT",

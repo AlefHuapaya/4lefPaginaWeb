@@ -17,7 +17,7 @@ export default async function SeguimientoPage() {
         </div>
         <Link
           href="/seguimiento/nuevo"
-          className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700"
+          className="rounded-md bg-entel-blue px-4 py-2 text-sm font-medium text-white hover:bg-entel-blue-dark"
         >
           Nuevo trabajo
         </Link>

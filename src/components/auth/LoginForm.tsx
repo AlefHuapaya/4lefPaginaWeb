@@ -43,7 +43,7 @@ export function LoginForm({ redirectTo }: { redirectTo: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 rounded-md bg-slate-900 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 disabled:opacity-60"
+        className="mt-2 rounded-md bg-entel-blue px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-entel-blue-dark disabled:opacity-60"
       >
         {pending ? "Ingresando…" : "Ingresar"}
       </button>

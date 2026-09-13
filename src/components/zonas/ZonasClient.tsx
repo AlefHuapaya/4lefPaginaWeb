@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { DEPARTAMENTOS_PERU } from "@/lib/data/departamentos";
 import { addZonaAsignacion, deleteZonaAsignacion } from "@/lib/actions/zonas";
+import { PeruMapVisual } from "@/components/zonas/PeruMapVisual";
 
 const TIPOS_TRABAJO = ["FO PINT", "FO PEXT", "MW", "Desmontaje", "CONTRATA FIJA"] as const;
 
@@ -44,43 +45,46 @@ export function ZonasClient({
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_22rem] lg:items-start">
       <section className="rounded-lg border border-slate-200 bg-white p-4">
-        <h2 className="font-semibold text-slate-900">Departamentos</h2>
-        <p className="mt-1 text-sm text-slate-500">
-          Elige un departamento para ver y registrar asignaciones de contrata/coordinador.
-        </p>
-        <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-          {DEPARTAMENTOS_PERU.map((d) => {
-            const total = conteos.get(d) ?? 0;
-            const active = depto === d;
-            return (
-              <button
-                key={d}
-                type="button"
-                onClick={() => setDepto(d)}
-                className={`rounded-md border px-3 py-2 text-left text-sm transition-colors ${
-                  active
-                    ? "border-slate-900 bg-slate-900 text-white"
-                    : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-400"
-                }`}
-              >
-                <span className="block font-medium">{d}</span>
-                <span className={`text-xs ${active ? "text-slate-300" : "text-slate-400"}`}>
-                  {total === 1 ? "1 asignación" : `${total} asignaciones`}
-                </span>
-              </button>
-            );
-          })}
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 className="font-semibold text-slate-900">Mapa de cobertura</h2>
+            <p className="mt-1 text-sm text-slate-500">
+              Pasa el cursor sobre un departamento para ver sus asignaciones.
+            </p>
+          </div>
+          <select
+            value={depto ?? ""}
+            onChange={(e) => setDepto(e.target.value || null)}
+            className="rounded-md border border-slate-300 px-2 py-1.5 text-sm text-slate-700 lg:hidden"
+          >
+            <option value="">Elegir departamento…</option>
+            {DEPARTAMENTOS_PERU.map((d) => (
+              <option key={d} value={d}>
+                {d} ({conteos.get(d) ?? 0})
+              </option>
+            ))}
+          </select>
         </div>
+
+        <div className="mt-4">
+          <PeruMapVisual activeDept={depto} onHoverDept={setDepto} />
+        </div>
+        <p className="mt-3 text-center text-xs text-slate-400">
+          En pantallas táctiles usa el selector de arriba.
+        </p>
       </section>
 
       <aside className="rounded-lg border border-slate-200 bg-white p-4">
         {!depto ? (
           <p className="text-sm text-slate-500">
-            Selecciona un departamento de la grilla para ver el detalle.
+            Pasa el cursor por el mapa (o elige un departamento) para ver el detalle.
           </p>
         ) : (
           <>
-            <h2 className="font-semibold text-slate-900">{depto}</h2>
+            <span className="inline-block rounded-full bg-entel-blue-tint px-2.5 py-1 text-xs font-semibold text-entel-blue">
+              ZONA SELECCIONADA
+            </span>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">{depto}</h2>
 
             <div className="mt-3 flex flex-col gap-2">
               {enZona.length === 0 ? (
@@ -164,7 +168,7 @@ export function ZonasClient({
 
               <button
                 type="submit"
-                className="rounded-md bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-700"
+                className="rounded-md bg-entel-blue px-3 py-2 text-sm font-medium text-white hover:bg-entel-blue-dark"
               >
                 Agregar asignación
               </button>

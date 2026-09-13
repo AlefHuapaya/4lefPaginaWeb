@@ -3,11 +3,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Colores de marca Entel, tomados en vivo de entel.pe */
+  --entel-blue: #002eff;
+  --entel-blue-dark: #001a99;
+  --entel-mint: #42e8b4;
+  --entel-blue-tint: #f3f5ff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-entel-blue: var(--entel-blue);
+  --color-entel-blue-dark: var(--entel-blue-dark);
+  --color-entel-mint: var(--entel-mint);
+  --color-entel-blue-tint: var(--entel-blue-tint);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -23,4 +33,34 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Fondo principal de la app: reemplazo temporal en tonos Entel. */
+/* Cuando pongas la imagen real en public/fondos/fondo-principal.png, */
+/* descomenta la línea background-image y bórrala de aquí si prefieres solo el gradiente. */
+.app-shell-background {
+  background-image:
+    linear-gradient(rgba(0, 20, 90, 0.72), rgba(0, 20, 90, 0.72))
+    /* , url("/fondos/fondo-principal.png") */;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--entel-blue-dark);
+}
+
+/* Mapa interactivo de Zonas (paths inyectados vía dangerouslySetInnerHTML) */
+.map-overlay .region path {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  transition: fill 0.12s, stroke 0.12s, filter 0.12s;
+}
+
+.map-overlay .region:hover path,
+.map-overlay .region.active path {
+  fill: rgba(0, 46, 255, 0.38);
+  stroke: var(--entel-blue);
+  filter: drop-shadow(0 0 3px rgba(0, 46, 255, 0.55));
 }
