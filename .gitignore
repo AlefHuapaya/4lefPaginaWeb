@@ -42,3 +42,7 @@ next-env.d.ts
 
 # datos fuente de importación (contienen info de contratas/acuerdos/costos, no van al repo público)
 /nuevos archivos/
+
+# fondos originales sin procesar (nombres de archivo temporales); las versiones
+# curadas y renombradas viven en /public/fondos y sí se versionan
+/fondos para la pagina/

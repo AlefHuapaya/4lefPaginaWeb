@@ -6,14 +6,12 @@ import type { Database } from "@/lib/types/database.types";
 
 type ValidadorArea = Database["public"]["Enums"]["validador_area"];
 
-// Gradientes placeholder por área (mismo tono de mood que las imágenes de referencia).
-// Para usar las imágenes reales: pon el archivo en public/fondos/ y cambia backgroundImage
-// por `url("/fondos/validador-pext.png"), <gradiente>` (el gradiente queda como overlay oscuro).
+// Imagen real por área + un velo semi-opaco para que el texto resalte sin perder el color.
 const AREA_BACKGROUND: Record<ValidadorArea, string> = {
-  PEXT: "linear-gradient(rgba(0,10,30,.45), rgba(0,10,30,.45)), linear-gradient(180deg, #7ec8f2 0%, #bfe6ff 55%, #d7ecd0 100%)",
-  TX: "linear-gradient(rgba(20,10,30,.45), rgba(20,10,30,.45)), linear-gradient(160deg, #2b2140 0%, #6a4a73 45%, #e8a0a0 100%)",
-  N3: "linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)), linear-gradient(180deg, #0b1130 0%, #16204a 60%, #2a2f55 100%)",
-  "CORE IP": "linear-gradient(rgba(20,8,0,.35), rgba(20,8,0,.35)), linear-gradient(160deg, #4a2a12 0%, #b3591b 55%, #f2a33d 100%)",
+  PEXT: 'linear-gradient(rgba(0,10,30,.4), rgba(0,10,30,.4)), url("/fondos/validador-pext.jpg")',
+  TX: 'linear-gradient(rgba(20,10,30,.4), rgba(20,10,30,.4)), url("/fondos/validador-tx.jpg")',
+  N3: 'linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("/fondos/validador-n3.jpg")',
+  "CORE IP": 'linear-gradient(rgba(20,8,0,.35), rgba(20,8,0,.35)), url("/fondos/validador-core-ip.jpg")',
 };
 
 const AREA_LABEL: Record<ValidadorArea, string> = {
@@ -28,7 +26,7 @@ export function ValidadorCard({ area, persona }: { area: ValidadorArea; persona:
 
   return (
     <div
-      className="relative flex aspect-video flex-col justify-between overflow-hidden rounded-xl p-3 shadow-sm"
+      className="relative flex aspect-video flex-col justify-between overflow-hidden rounded-xl bg-cover bg-center p-3 shadow-sm"
       style={{ backgroundImage: AREA_BACKGROUND[area] }}
     >
       <span className="w-fit rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-bold text-slate-900">

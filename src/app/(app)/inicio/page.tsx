@@ -1,5 +1,4 @@
 import { ValidadoresSemana } from "@/components/inicio/ValidadoresSemana";
-import { ConciertosCards } from "@/components/inicio/ConciertosCards";
 
 export default function InicioPage() {
   return (
@@ -10,7 +9,6 @@ export default function InicioPage() {
       </div>
 
       <ValidadoresSemana />
-      <ConciertosCards />
     </div>
   );
 }

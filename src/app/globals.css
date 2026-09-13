@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
   --foreground: #171717;
 
@@ -22,12 +23,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Sin variante oscura automática: todo el contenido vive en tarjetas claras
+   (bg-slate-50/bg-white) con texto oscuro explícito. Si el sistema del usuario
+   está en modo oscuro, invertir --foreground aquí rompería el contraste contra
+   esas tarjetas claras, así que mantenemos el tema fijo en claro. */
 
 body {
   background: var(--background);
@@ -35,16 +34,16 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Fondo principal de la app: reemplazo temporal en tonos Entel. */
-/* Cuando pongas la imagen real en public/fondos/fondo-principal.png, */
-/* descomenta la línea background-image y bórrala de aquí si prefieres solo el gradiente. */
+/* Fondo principal de la app: la imagen real con un velo semi-opaco en azul Entel
+   encima (para que la info resalte) sin perder del todo el color de la foto. */
 .app-shell-background {
   background-image:
-    linear-gradient(rgba(0, 20, 90, 0.72), rgba(0, 20, 90, 0.72))
-    /* , url("/fondos/fondo-principal.png") */;
+    linear-gradient(rgba(0, 20, 90, 0.55), rgba(0, 20, 90, 0.55)),
+    url("/fondos/fondo-principal.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-color: var(--entel-blue-dark);
 }
 
