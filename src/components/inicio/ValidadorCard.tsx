@@ -8,10 +8,10 @@ type ValidadorArea = Database["public"]["Enums"]["validador_area"];
 
 // Imagen real por área + un velo semi-opaco para que el texto resalte sin perder el color.
 const AREA_BACKGROUND: Record<ValidadorArea, string> = {
-  PEXT: 'linear-gradient(rgba(0,10,30,.4), rgba(0,10,30,.4)), url("/fondos/validador-pext.jpg")',
-  TX: 'linear-gradient(rgba(20,10,30,.4), rgba(20,10,30,.4)), url("/fondos/validador-tx.jpg")',
-  N3: 'linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("/fondos/validador-n3.jpg")',
-  "CORE IP": 'linear-gradient(rgba(20,8,0,.35), rgba(20,8,0,.35)), url("/fondos/validador-core-ip.jpg")',
+  PEXT: 'linear-gradient(rgba(0,20,60,.45), rgba(0,20,60,.45)), url("/fondos/validador-pext.jpg")',
+  TX: 'linear-gradient(rgba(10,10,45,.45), rgba(10,10,45,.45)), url("/fondos/validador-tx.jpg")',
+  N3: 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url("/fondos/validador-n3.jpg")',
+  "CORE IP": 'linear-gradient(rgba(15,8,40,.42), rgba(15,8,40,.42)), url("/fondos/validador-core-ip.jpg")',
 };
 
 const AREA_LABEL: Record<ValidadorArea, string> = {
