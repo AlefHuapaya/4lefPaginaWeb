@@ -48,7 +48,7 @@ export type Database = {
           id: string
           nombre: string
           nro_acuerdo: string | null
-          tipo: Database["public"]["Enums"]["contrata_tipo"]
+          tipo: Database["public"]["Enums"]["contrata_tipo"] | null
         }
         Insert: {
           aliases?: string[]
@@ -58,7 +58,7 @@ export type Database = {
           id?: string
           nombre: string
           nro_acuerdo?: string | null
-          tipo: Database["public"]["Enums"]["contrata_tipo"]
+          tipo?: Database["public"]["Enums"]["contrata_tipo"] | null
         }
         Update: {
           aliases?: string[]
@@ -68,7 +68,7 @@ export type Database = {
           id?: string
           nombre?: string
           nro_acuerdo?: string | null
-          tipo?: Database["public"]["Enums"]["contrata_tipo"]
+          tipo?: Database["public"]["Enums"]["contrata_tipo"] | null
         }
         Relationships: []
       }
@@ -104,6 +104,35 @@ export type Database = {
           url?: string
         }
         Relationships: []
+      }
+      mision_vision: {
+        Row: {
+          clave: Database["public"]["Enums"]["mision_vision_clave"]
+          contenido: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          clave: Database["public"]["Enums"]["mision_vision_clave"]
+          contenido?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          clave?: Database["public"]["Enums"]["mision_vision_clave"]
+          contenido?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mision_vision_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       pagos: {
         Row: {
@@ -281,70 +310,6 @@ export type Database = {
           },
         ]
       }
-      weekly_highlight_images: {
-        Row: {
-          created_at: string
-          highlight_id: string
-          id: string
-          orden: number
-          storage_path: string
-        }
-        Insert: {
-          created_at?: string
-          highlight_id: string
-          id?: string
-          orden?: number
-          storage_path: string
-        }
-        Update: {
-          created_at?: string
-          highlight_id?: string
-          id?: string
-          orden?: number
-          storage_path?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "weekly_highlight_images_highlight_id_fkey"
-            columns: ["highlight_id"]
-            isOneToOne: false
-            referencedRelation: "weekly_highlights"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      weekly_highlights: {
-        Row: {
-          id: string
-          semana_inicio: string
-          titulo: string
-          updated_at: string
-          updated_by: string | null
-        }
-        Insert: {
-          id?: string
-          semana_inicio: string
-          titulo?: string
-          updated_at?: string
-          updated_by?: string | null
-        }
-        Update: {
-          id?: string
-          semana_inicio?: string
-          titulo?: string
-          updated_at?: string
-          updated_by?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "weekly_highlights_updated_by_fkey"
-            columns: ["updated_by"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       zona_asignaciones: {
         Row: {
           contrata_id: string | null
@@ -416,6 +381,7 @@ export type Database = {
     Enums: {
       contrata_tipo: "FO" | "NODOS, IB Y MW"
       link_seccion: "plataformas" | "manuales"
+      mision_vision_clave: "mision" | "vision"
       pago_estado: "PAGADO" | "PENDIENTE" | "NO"
       trabajo_estado: "EJECUTADO" | "STAND BY" | "NO"
       trabajo_tipo:
@@ -560,6 +526,7 @@ export const Constants = {
     Enums: {
       contrata_tipo: ["FO", "NODOS, IB Y MW"],
       link_seccion: ["plataformas", "manuales"],
+      mision_vision_clave: ["mision", "vision"],
       pago_estado: ["PAGADO", "PENDIENTE", "NO"],
       trabajo_estado: ["EJECUTADO", "STAND BY", "NO"],
       trabajo_tipo: [

@@ -1,3 +1,4 @@
+import { MisionVisionSection } from "@/components/inicio/MisionVisionSection";
 import { ValidadoresSemana } from "@/components/inicio/ValidadoresSemana";
 
 export default function InicioPage() {
@@ -8,6 +9,7 @@ export default function InicioPage() {
         <p className="mt-1 text-sm text-slate-500">Novedades de la semana para el equipo.</p>
       </div>
 
+      <MisionVisionSection />
       <ValidadoresSemana />
     </div>
   );

@@ -26,6 +26,7 @@ export default async function PlataformasPage() {
       <LinksGrid
         links={links ?? []}
         emptyMessage="Todavía no hay plataformas registradas. Agrega la primera abajo."
+        showFavicon
       />
 
       <AddLinkForm action={addPlataforma} />
